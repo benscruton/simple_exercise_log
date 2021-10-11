@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    {% load static %}
+    <script src="{% static 'js/ajax_test.js' %}" async></script>
+    <title>Document</title>
+</head>
+<body class="container">
+    <h1 class="center">Hello</h1>
+    <h2 class="center">This is a web site</h2>
+    
+    <button class="btn" id="hello_button">Hello</button>
+
+    <form method="POST" action="/users/new" class="row">
+    {% csrf_token %}
+        <div class="input-field col s6">
+            <input type="text" name="first_name" id="first_name" />
+            <label for="first_name">First name:</label>
+        </div>
+        <div class="input-field col s6">
+            <input type="text" name="last_name" id="last_name" />
+            <label for="last_name">Last name:</label>
+        </div>
+        <button type="submit" class="btn">Submit</button>
+    </form>
+
+    <table class="striped">
+        <thead>
+            <tr>
+                <th class="center" colspan="2">USERS:</th>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+        </thead>
+        <tbody class="orange">
+            <tr>
+                <td>User</td>
+                <td>One</td>
+            </tr>
+            <tr>
+                <td>User</td>
+                <td>Two</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
