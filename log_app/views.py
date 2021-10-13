@@ -6,3 +6,6 @@ def index(request):
 
 def ajax_testing(request):
     return render(request, "ajax_testing.html")
+
+def add_user(request):
+    return "hello"

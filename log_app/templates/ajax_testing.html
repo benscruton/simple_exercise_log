@@ -19,7 +19,7 @@
     
     <button class="btn" id="hello_button">Hello</button>
 
-    <form method="POST" action="/users/new" class="row">
+    <form method="POST" action="/users/new" class="row" id="user_form">
     {% csrf_token %}
         <div class="input-field col s6">
             <input type="text" name="first_name" id="first_name" />
@@ -32,7 +32,7 @@
         <button type="submit" class="btn">Submit</button>
     </form>
 
-    <table class="striped">
+    <table class="striped" id="users_table">
         <thead>
             <tr>
                 <th class="center" colspan="2">USERS:</th>
