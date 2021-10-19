@@ -1,5 +1,7 @@
 from django.db import models
 
+import datetime
+
 # Create your models here.
 
 class WorkoutManager(models.Manager):
@@ -16,6 +18,14 @@ class WorkoutManager(models.Manager):
             duration_is_valid = False
         if not duration_is_valid:
             errors["duration"] = "Duration must be a number greater than 0."
+
+        try:
+            datetime.datetime.strptime(post_data["date"], "%Y-%m-%d")
+            date_is_valid = True
+        except:
+            date_is_valid = False
+        if not date_is_valid:
+            errors["date"] = "Please enter a valid date (format: YYYY-MM-DD)"
 
         return errors
 
