@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+    <h1 class="center-align">Workout:</h1>
+    <div class="card">
+        <table class="striped-table">
+            <tbody>
+                <tr>
+                    <td>Type of exercise:</td>
+                    <td>{{workout_type}}</td>
+                </tr>
+
+                <tr>
+                    <td>Date:</td>
+                    <td>{{workout_date}}</td>
+                </tr>
+
+                <tr>
+                    <td>Duration:</td>
+                    <td>{{workout_duration}}</td>
+                </tr>
+
+                <tr>
+                    <td>Notes</td>
+                    <td>{{workout_notes}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

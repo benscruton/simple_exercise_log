@@ -20,7 +20,7 @@ def add_workout(request):
         del request.session["workout_errors"]
         context["submission"] = request.session["workout_submitted_info"]
         del request.session["workout_submitted_info"]
-    return render(request, "new_workout.html", context)
+    return render(request, "workouts.html", context)
 
 def create_workout(request):
     errors = Workout.objects.basic_validator(request.POST)
@@ -28,13 +28,25 @@ def create_workout(request):
         request.session["workout_errors"] = errors
         request.session["workout_submitted_info"] = request.POST
         return redirect("/workouts/new")
+    
+    w = Workout.objects.create(
+        type_of_exercise = request.POST["type"],
+        duration = request.POST["duration"],
+        notes = request.POST["notes"],
+        date = datetime.datetime.strptime(
+            request.POST["date"],
+            "%Y-%m-%d"
+        )
+    )
+    return redirect(f"/workouts/{w.id}")
 
-    printer = f"type:     {request.POST['type']}<br/>"
-    printer += f"duration: {request.POST['duration']}<br/>"
-    printer += f"notes:    {request.POST['notes']}<br/>"
-    date = request.POST["date"]
-    print(type(date))
-    date = datetime.datetime.strptime(date, "%Y-%m-%d")
-    date = datetime.date(year = date.year, month = date.month, day = date.day)
-    printer += f"date: <blockquote>{datetime.datetime.strftime(date, 'year: %Y<br/>month: %B<br/>day: %d')}</blockquote>"
-    return HttpResponse(printer)
+def view_workout(request, workout_id):
+    w = Workout.objects.get(id=workout_id)
+    context = {}
+    context["workout_type"] = w.type_of_exercise
+    context["workout_date"] = datetime.datetime.strftime(w.date, "%b %d, %Y")
+    duration = f"{w.duration // 60 + ' hours ' if w.duration >= 60 else ''}"
+    duration += f"{w.duration % 60} minutes"
+    context["workout_duration"] = duration
+    context["workout_notes"] = w.notes
+    return render(request, "workout_detail.html", context)
