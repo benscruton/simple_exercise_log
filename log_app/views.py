@@ -3,7 +3,7 @@ from .models import *
 
 import datetime
 
-# Create your views here.
+# Create your views here:
 def index(request):
     return redirect("/test")
 
@@ -45,8 +45,21 @@ def view_workout(request, workout_id):
     context = {}
     context["workout_type"] = w.type_of_exercise
     context["workout_date"] = datetime.datetime.strftime(w.date, "%b %d, %Y")
-    duration = f"{w.duration // 60 + ' hours ' if w.duration >= 60 else ''}"
-    duration += f"{w.duration % 60} minutes"
-    context["workout_duration"] = duration
+    context["workout_duration"] = number_to_hours_minutes(w.duration)
     context["workout_notes"] = w.notes
     return render(request, "workout_detail.html", context)
+
+def all_workouts(request):
+    all_workouts = list(Workout.objects.all())
+    for w in all_workouts:
+        w.duration = number_to_hours_minutes(w.duration)
+    all_workouts.sort(key = lambda w: w.date, reverse=True)
+    context = {
+        "workouts": all_workouts
+    }
+    return render(request, "index.html", context)
+
+def number_to_hours_minutes(duration):
+    output = f"{duration // 60 + ' hours ' if duration >= 60 else ''}"
+    output += f"{duration % 60} minutes"
+    return output
