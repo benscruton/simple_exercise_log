@@ -5,7 +5,7 @@ import datetime
 
 # Create your views here:
 def index(request):
-    return redirect("/test")
+    return redirect("/workouts")
 
 def ajax_testing(request):
     return render(request, "ajax_testing.html")
@@ -59,7 +59,9 @@ def all_workouts(request):
     }
     return render(request, "index.html", context)
 
+
 def number_to_hours_minutes(duration):
-    output = f"{duration // 60 + ' hours ' if duration >= 60 else ''}"
+    output = f"{f'{duration // 60} hour' if duration >= 60 else ''}"
+    output += "s " if duration >= 120 else " "
     output += f"{duration % 60} minutes"
-    return output
+    return output.strip()

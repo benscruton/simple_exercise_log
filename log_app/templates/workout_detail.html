@@ -9,33 +9,39 @@
     <title>Document</title>
 </head>
 <body>
-<div class="container">
-    <h1 class="center-align">Workout:</h1>
-    <div class="card">
-        <table class="striped-table">
-            <tbody>
-                <tr>
-                    <td>Type of exercise:</td>
-                    <td>{{workout_type}}</td>
-                </tr>
+    <header class="center">
+        <div class="collection">
+            <a class="collection-item" href="/workouts/new">Add new workout</a>
+            <a class="collection-item" href="/workouts">Home</a>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="center-align">Workout:</h1>
+        <div class="card">
+            <table class="striped-table">
+                <tbody>
+                    <tr>
+                        <td>Type of exercise:</td>
+                        <td>{{workout_type}}</td>
+                    </tr>
 
-                <tr>
-                    <td>Date:</td>
-                    <td>{{workout_date}}</td>
-                </tr>
+                    <tr>
+                        <td>Date:</td>
+                        <td>{{workout_date}}</td>
+                    </tr>
 
-                <tr>
-                    <td>Duration:</td>
-                    <td>{{workout_duration}}</td>
-                </tr>
+                    <tr>
+                        <td>Duration:</td>
+                        <td>{{workout_duration}}</td>
+                    </tr>
 
-                <tr>
-                    <td>Notes</td>
-                    <td>{{workout_notes}}</td>
-                </tr>
-            </tbody>
-        </table>
+                    <tr>
+                        <td>Notes</td>
+                        <td>{{workout_notes}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 </body>
 </html>

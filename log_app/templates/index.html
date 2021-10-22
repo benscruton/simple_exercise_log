@@ -9,30 +9,38 @@
     <title>Document</title>
 </head>
 <body>
-<div class="container">
-    <h1 class="center">All Workouts:</h1>
-    <div class="card">
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th>Type</th>
-                    <th>Duration</th>
-                    <th>Date</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for w in workouts %}
-                <tr>
-                    <td>{{w.type_of_exercise}}</td>
-                    <td>{{w.duration}}</td>
-                    <td>{{w.date}}</td>
-                    <td>{{w.notes}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <header class="center">
+        <div class="collection">
+            <a class="collection-item" href="/workouts/new">Add new workout</a>
+            <a class="collection-item" href="/workouts">Home</a>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="center">All Workouts:</h1>
+        <div class="card">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Duration</th>
+                        <th>Date</th>
+                        <th>Notes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for w in workouts %}
+                    <tr>
+                        <td>{{w.type_of_exercise}}</td>
+                        <td>{{w.duration}}</td>
+                        <td>{{w.date}}</td>
+                        <td>{{w.notes}}</td>
+                        <td><a href="/workouts/{{w.id}}">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 </body>
 </html>
