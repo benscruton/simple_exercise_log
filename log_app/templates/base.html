@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    {% load static %}
+    <script src="{% static 'js/ajax_scripts.js' %}" async></script>
+
+    <title>Document</title>
+</head>
+<body class="container">
+    <header class="center">
+        <div class="collection">
+            <a class="collection-item" href="/workouts/new">Add new workout</a>
+            <a class="collection-item" href="/workouts">Home</a>
+        </div>
+    </header>
+    {% block main_content %}
+
+    {% endblock %}
+
+</body>
+</html>
