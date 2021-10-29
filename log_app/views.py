@@ -22,6 +22,30 @@ def add_workout(request):
         del request.session["workout_submitted_info"]
     return render(request, "workouts.html", context)
 
+def create_workout_return_row(request):
+    errors = Workout.objects.basic_validator(request.POST)
+    if errors:
+        return None
+    w = Workout.objects.create(
+        type_of_exercise = request.POST["type"],
+        duration = request.POST["duration"],
+        notes = request.POST["notes"],
+        date = datetime.datetime.strptime(
+            request.POST["date"],
+            "%Y-%m-%d"
+        )
+    )
+    w.duration = number_to_hours_minutes(int(w.duration))
+    w.date = datetime.datetime.strftime(
+        w.date, "%b %d, %Y"
+    )
+    print(type(w.date))
+    context = {
+        "w": w
+    }
+    return render(request, "_new_workout_row.html", context)
+
+
 def create_workout(request):
     errors = Workout.objects.basic_validator(request.POST)
     if errors:

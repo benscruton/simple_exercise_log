@@ -8,5 +8,6 @@ urlpatterns = [
     path("workouts", views.all_workouts),
     path("workouts/new", views.add_workout),
     path("workouts/create", views.create_workout),
+    path("workouts/create/return_row", views.create_workout_return_row),
     path("workouts/<int:workout_id>", views.view_workout),
 ]

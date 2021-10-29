@@ -4,7 +4,7 @@
 
     <h3 class="center">All Workouts:</h3>
     <div class="card">
-        <table class="striped">
+        <table class="striped" id="workouts_table">
             <thead>
                 <tr>
                     <th>Type</th>
@@ -30,7 +30,7 @@
 
     <h3 class="center">Add New Workout</h3>
     <div class="card">
-        <form class="card-content" action="/workouts/create" method="POST">
+        <form class="card-content" action="/workouts/create" method="POST" id="new_workout">
         {% csrf_token %}
             <div class="row">
                 <div class="col s12 m6 l4">
@@ -38,7 +38,9 @@
                         <input type="text" name="type" id="type" value="{{submission.type}}" />
                         <label for="type">Type of exercise</label>
                     </div>
-                    <p class="red-text">{{errors.type}}</p>
+                    <p class="red-text" id="error_type">
+                        {{errors.type}}
+                    </p>
                 </div>
 
                 <div class="col s12 m6 l4">
@@ -46,7 +48,9 @@
                         <input type="date" name="date" id="date" value="{{submission.date}}" />
                         <label for="date">Date</label>
                     </div>
-                    <p class="red-text">{{errors.date}}{% if errors.type %}&nbsp;{% endif %}</p>
+                    <p class="red-text" id="error_date">
+                        {{errors.date}}{% if errors.type %}&nbsp;{% endif %}
+                    </p>
                 </div>
 
                 <div class="col s12 m4 l4">
@@ -54,7 +58,9 @@
                         <input type="number" name="duration" id="duration" value="{{submission.duration}}" />
                         <label for="duration">Workout duration</label>
                     </div>
-                    <p class="red-text">{{errors.duration}}</p>
+                    <p class="red-text" id="error_duration">
+                        {{errors.duration}}
+                    </p>
                 </div>
 
                 <div class="col s12 m8 l12">
