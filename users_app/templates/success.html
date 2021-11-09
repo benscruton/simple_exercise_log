@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Success!</title>
+</head>
+<body>
+<div id="wrapper">
+    
+    <div class="rightflex"><a href="/users/logout" class="logout">Log out</a></div>
+
+    <h2>Successfully {{request.session.last_act}}!  Welcome, {{request.session.first_name}}.</h2>
+
+    <p>Name: {{request.session.first_name}} {{request.session.last_name}}</p>
+    <p>Email: {{request.session.email}}</p>
+
+</div>
+</body>
+</html>

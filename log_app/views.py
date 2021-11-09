@@ -13,15 +13,6 @@ def ajax_testing(request):
 def add_user(request):
     return "hello"
 
-def add_workout(request):
-    context = {}
-    if "workout_errors" in request.session:
-        context["errors"] = request.session["workout_errors"]
-        del request.session["workout_errors"]
-        context["submission"] = request.session["workout_submitted_info"]
-        del request.session["workout_submitted_info"]
-    return render(request, "workouts.html", context)
-
 def create_workout_return_row(request):
     errors = Workout.objects.basic_validator(request.POST)
     if errors:
@@ -82,6 +73,11 @@ def all_workouts(request):
         "workouts": all_workouts
     }
     return render(request, "index.html", context)
+
+def delete_workout(request, workout_id):
+    w = Workout.objects.get(id=workout_id)
+    w.delete()
+    return redirect("/workouts")
 
 
 def number_to_hours_minutes(duration):
