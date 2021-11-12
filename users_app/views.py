@@ -30,13 +30,13 @@ def register_new_user(request):
     request.session["email"] = this_user.email
     request.session["last_act"] = "registered account"
 
-    return redirect("/success")
+    return redirect("/login/success")
 
 
 def success(request):
     if not "user_id" in request.session:
         messages.error(request, "You must be logged in to view this page.")
-        return redirect("/")
+        return redirect("/login")
 
     return render(request, "success.html")
 
@@ -47,7 +47,7 @@ def logout(request):
     del request.session["last_name"]
     del request.session["email"]
     del request.session["last_act"]
-    return redirect("/")
+    return redirect("/login")
 
 
 def login(request):
@@ -55,13 +55,13 @@ def login(request):
         this_user = User.objects.get(email = request.POST["email"])
     except:
         messages.error(request, "User not found!")
-        return redirect("/")
+        return redirect("/login")
 
     match = bcrypt.checkpw(request.POST["password"].encode(), this_user.hashed_pw.encode())
     
     if not match:
         messages.error(request, "User and password didn't match.")
-        return redirect("/")
+        return redirect("/login")
 
     request.session["user_id"] = this_user.id
     request.session["first_name"] = this_user.first_name
@@ -69,4 +69,4 @@ def login(request):
     request.session["email"] = this_user.email
     request.session["last_act"] = "logged in"
     
-    return redirect("/success")
+    return redirect("/login/success")
