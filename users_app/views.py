@@ -13,7 +13,7 @@ def register_new_user(request):
     errors = User.objects.basic_validator(request.POST)
 
     if errors:
-        for k, v in errors.items():
+        for v in errors.values():
             messages.error(request, v)
         return redirect("/")
 

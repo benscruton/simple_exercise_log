@@ -1,4 +1,5 @@
 from django.db import models
+from users_app.models import User
 
 import datetime
 
@@ -34,6 +35,7 @@ class Workout(models.Model):
     duration = models.IntegerField()
     date = models.DateField(blank=True, null=True)
     notes = models.TextField(blank=True)
+    user = models.ForeignKey(User, related_name="workouts", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = WorkoutManager()
