@@ -13,10 +13,10 @@
     
     <div class="rightflex"><a href="/login/users/logout" class="logout">Log out</a></div>
 
-    <h2>Successfully {{request.session.last_act}}!  Welcome, {{request.session.first_name}}.</h2>
+    <h2>Successfully {{request.session.last_act}}!  Welcome, {{request.session.user.first_name}}.</h2>
 
-    <p>Name: {{request.session.first_name}} {{request.session.last_name}}</p>
-    <p>Email: {{request.session.email}}</p>
+    <p>Name: {{request.session.user.first_name}} {{request.session.user.last_name}}</p>
+    <p>Email: {{request.session.user.email}}</p>
 
 </div>
 </body>

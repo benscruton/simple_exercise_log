@@ -34,7 +34,7 @@ def register_new_user(request):
 
 
 def success(request):
-    if not "user_id" in request.session:
+    if not "user" in request.session:
         messages.error(request, "You must be logged in to view this page.")
         return redirect("/login")
 
@@ -42,12 +42,9 @@ def success(request):
 
 
 def logout(request):
-    del request.session["user_id"]
-    del request.session["first_name"]
-    del request.session["last_name"]
-    del request.session["email"]
-    del request.session["last_act"]
-    return redirect("/login")
+    del request.session["user"]
+    request.session["last_act"] = "logged out"
+    return redirect("/")
 
 
 def login(request):
@@ -63,10 +60,12 @@ def login(request):
         messages.error(request, "User and password didn't match.")
         return redirect("/login")
 
-    request.session["user_id"] = this_user.id
-    request.session["first_name"] = this_user.first_name
-    request.session["last_name"] = this_user.last_name
-    request.session["email"] = this_user.email
+    request.session["user"] = {
+        "id": this_user.id,
+        "first_name": this_user.first_name,
+        "last_name": this_user.last_name,
+        "email": this_user.email
+    }
     request.session["last_act"] = "logged in"
     
-    return redirect("/login/success")
+    return redirect("/")

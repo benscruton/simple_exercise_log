@@ -14,15 +14,31 @@
 
     <title>Document</title>
 </head>
-<body class="container">
-    <header class="center">
-        <div class="collection">
-            <a class="collection-item" href="/workouts">Home</a>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            {% if "user" in request.session.keys %}
+            <div style="padding-left: 10px;">
+                <a href="#" class="brand-logo">Hello {{request.session.user.first_name}}</a>
+            </div>
+            {% endif %}
+            <ul class="right">
+                <li><a href="/workouts">Home</a></li>
+                {% if "user" in request.session %}
+                    <li><a href="/login/users/logout">Log Out</a></li>
+                {% else %}
+                    <li><a href="/login">Log In</a></li>
+                {% endif %}
+            </ul>
         </div>
-    </header>
-    {% block main_content %}
+    </nav>
 
-    {% endblock %}
+    <main class="container">
 
+        {% block main_content %}
+
+        {% endblock %}
+
+    </main>
 </body>
 </html>
