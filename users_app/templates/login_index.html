@@ -1,85 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <title>Register or Log In</title>
-</head>
-<body>
-<div id="wrapper">
+{% extends "base.html" %}
 
-    <header>
-        {% if messages %}
-        <p class="error_intro">Attempt failed.  Please correct the following errors and try again:</p>
-        <ul class="error_list">
-            {% for message in messages %}
-            <li class="error_msg">{{message}}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    </header>
-    
-    <main>
+{% block main_content %}
 
-        <form method="POST" action="users/register">
-        {% csrf_token %}
-            <h2>Register:</h2>
+{% if messages %}
+<header class="row">
+    <div class="card xl4 offset-xl4 l6 offset-l3 m8 offset-m2 s12">
+        <div class="card-content center">
+            <p class="center">Attempt failed.  Please correct the following errors and try again:</p>
+            <ul class="left-align">
+                {% for message in messages %}
+                <li class="red-text text-darken-2">{{message}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</header>
+{% endif %}
 
-            <div class="row">
-                <label for="first_name">First name</label>
-                <input type="text" class="fix_width" name="first_name">
-            </div>
+<main class="row">
+    <div class="col xl5 offset-xl1 l6 m6 s12">
+        <div class="card col s10 offset-s1">
+            <h2 class="center card-title">Log In:</h2>
 
-            <div class="row">
-                <label for="last_name">Last name</label>
-                <input type="text" class="fix_width" name="last_name">
-            </div>
-
-            <div class="row">
-                <label for="email">Email address</label>
-                <input type="email" class="fix_width" name="email">
-            </div>
-
-            <div class="row">
-                <label for="password">Password</label>
-                <input type="password" class="fix_width" name="password">
-            </div>
-
-            <div class="row">
-                <label for="confirm_pw">Confirm password</label>
-                <input type="password" class="fix_width" name="confirm_pw">
-            </div>
-
-            <div class="centerflex">
-                <input type="submit" class="coolbutton" value="Register">
-            </div>
-        </form>
-
-
-
-        <form method="POST" action="users/login">
+            <form method="POST" action="/login/users/login" class="card-content row">
             {% csrf_token %}
-                <h2>Log in:</h2>
-    
-                <div class="row">
-                    <label for="email">Email address</label>
+
+                <div class="input-field col-s12">
                     <input type="email" class="fix_width" name="email">
+                    <label for="email">Email address</label>
+                </div>
+
+                <div class="input-field col-s12">
+                    <input type="password" class="fix_width" name="password">
+                    <label for="password">Password</label>
                 </div>
     
-                <div class="row">
-                    <label for="password">Password</label>
-                    <input type="password" class="fix_width" name="password">
-                </div>
-        
-                <div class="centerflex">
-                    <input type="submit" class="coolbutton" value="Log in">
+                <div class="center-align">
+                    <button type="submit" class="btn blue darken-1 white-text waves-effect waves-effect-light">
+                        Log In
+                    </button>
                 </div>
             </form>
+        </div>
+    </div>
 
-    </main>
-</div>
-</body>
-</html>
+
+    <div class="col xl5 l6 m6 s12">
+        <div class="card col s10 offset-s1">
+            <h2 class="center card-title">Register:</h2>
+
+            <form method="POST" action="/login/users/register" class="card-content">
+            {% csrf_token %}
+
+                <div class="input-field col-s12">
+                    <input type="text" name="first_name">
+                    <label for="first_name">First name</label>
+                </div>
+
+                <div class="input-field col-s12">
+                    <input type="text" name="last_name">
+                    <label for="last_name">Last name</label>
+                </div>
+
+                <div class="input-field col-s12">
+                    <input type="email" name="email">
+                    <label for="email">Email address</label>
+                </div>
+
+                <div class="input-field col-s12">
+                    <input type="password" name="password">
+                    <label for="password">Password</label>
+                </div>
+
+                <div class="input-field col-s12">
+                    <input type="password" name="confirm_pw">
+                    <label for="confirm_pw">Confirm password</label>
+                </div>
+
+                <div class="center-align">
+                    <button type="submit" class="btn blue darken-1 white-text waves-effect waves-effect-light">
+                        Register
+                    </button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+</main>
+{% endblock %}

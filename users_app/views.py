@@ -15,7 +15,7 @@ def register_new_user(request):
     if errors:
         for v in errors.values():
             messages.error(request, v)
-        return redirect("/")
+        return redirect("/login")
 
     this_user = User.objects.create(
         first_name = request.POST["first_name"],

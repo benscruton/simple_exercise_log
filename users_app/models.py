@@ -10,18 +10,18 @@ class UserManager(models.Manager):
         errors = {}
         users_with_email = User.objects.filter(email = post_data["email"])
 
-        if (len(post_data["first_name"]) < 2) or not (post_data["first_name"].isalpha()):
-            errors["first_name"] = "First name must have at least two characters, and only include alphabetic characters."
-        if (len(post_data["last_name"]) < 2) or not (post_data["last_name"].isalpha()):
-            errors["last_name"] = "Last name must have at least two characters, and only include alphabetic characters."
-        if not EMAIL_REGEX.match(post_data["email"]):
-            errors["email"] = "You must use a valid email address to register."
+        if (len(post_data["first_name"]) < 1):
+            errors["first_name"] = "First name is required."
+        if (len(post_data["last_name"]) < 1):
+            errors["last_name"] = "Last name is required."
+        if (not EMAIL_REGEX.match(post_data["email"]) or len(post_data["email"]) < 1):
+            errors["email"] = "A valid email address is required."
         if len(users_with_email) > 0:
             errors["email"] = "There is already a user registered with this email address."
         if len(post_data["password"]) < 8:
-            errors["password"] = "Your password must be at least 8 characters long."
+            errors["password"] = "Password must be at least 8 characters long."
         if not (post_data["password"] == post_data["confirm_pw"]):
-            errors["confirm_pw"] = "Passwords did not match."
+            errors["confirm_pw"] = "Passwords must match."
 
         return errors
 
