@@ -32,6 +32,7 @@
     <div class="card">
         <form class="card-content" action="/workouts/create" method="POST" id="new_workout">
         {% csrf_token %}
+            <p class="red-text">{{errors.user_id}}</p>
             <div class="row">
                 <div class="col s12 m6 l4">
                     <div class="input-field">

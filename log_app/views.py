@@ -10,9 +10,6 @@ def index(request):
 def ajax_testing(request):
     return render(request, "ajax_testing.html")
 
-def add_user(request):
-    return "hello"
-
 def create_workout_return_row(request):
     errors = Workout.objects.basic_validator(request.POST)
     if errors:
@@ -39,10 +36,18 @@ def create_workout_return_row(request):
 
 def create_workout(request):
     errors = Workout.objects.basic_validator(request.POST)
+
+    if "user" in request.session and "id" in request.session["user"]:
+        pass
+    else:
+        errors["user_id"] = "Must be logged in to add workout"
+
     if errors:
-        request.session["workout_errors"] = errors
-        request.session["workout_submitted_info"] = request.POST
-        return redirect("/workouts/new")
+        request.session["input_error_info"] = {
+            "errors": errors,
+            "submission": request.POST,
+        }
+        return redirect("/workouts")
     
     w = Workout.objects.create(
         type_of_exercise = request.POST["type"],
@@ -72,6 +77,12 @@ def all_workouts(request):
     context = {
         "workouts": all_workouts
     }
+    
+    if "input_error_info" in request.session:
+        context["errors"] = request.session["input_error_info"]["errors"]
+        context["submission"] = request.session["input_error_info"]["submission"]
+        del request.session["input_error_info"]
+
     return render(request, "index.html", context)
 
 def delete_workout(request, workout_id):
